@@ -17,10 +17,16 @@ const filterSlice = createSlice({
         },
         setSortType: (state, action) => {
             state.sort = action.payload
+        },
+        setFilters: (state, action) => {
+            state.categoryId = Number(action.payload.categoryId)
+            state.currentPage = Number(action.payload.currentPage)
+            state.sortType = action.payload.sortType
+
         }
     }
 })
 
-export const {setCategoryId, setSortType} = filterSlice.actions;
+export const {setCategoryId, setSortType, setFilters} = filterSlice.actions;
 
 export  default filterSlice.reducer

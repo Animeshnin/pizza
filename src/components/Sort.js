@@ -2,12 +2,7 @@ import React, { useState } from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import { setSortType} from "../redux/slices/filterSlice";
 
-export default function Sort() {
-  const [active, setActive] = useState(false)
-  const sortType = useSelector((state) => state.filter.sort);
-  const dispatch = useDispatch();
-
-  const list = [
+export const list = [
   {
     name: "популярности",
     sort: 'rating',
@@ -20,8 +15,14 @@ export default function Sort() {
     name: "алфавиту",
     sort: 'title',
   }
-  
 ]
+
+
+export default function Sort() {
+  const [active, setActive] = useState(false)
+  const sortType = useSelector((state) => state.filter.sort);
+  const dispatch = useDispatch();
+
 
   const updateStateActiveAndSort = (text) => {
     setActive(prev => !prev)

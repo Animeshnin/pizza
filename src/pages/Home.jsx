@@ -40,7 +40,6 @@ export const Home = () => {
                 setItems(arr);
                 setIsLoading(false);
             });
-        console.log('asd')
     }
 
     useEffect(() => {
@@ -53,7 +52,6 @@ export const Home = () => {
                 ...params,
                 sort
             }))
-            console.log("asdasd")
             isSearch.current = true
 
         }

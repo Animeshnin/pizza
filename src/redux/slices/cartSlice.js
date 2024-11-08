@@ -2,16 +2,20 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
     totalPrice: 0,
-    items: []
+    items: [],
+    typePizza: 'тонкое'
 };
 
 const cartSlice = createSlice({
+    // Этот слайс отвечает за создание корзины
     name: 'cart',
     initialState,
+    // reducers в нем хранятся функции которые изменяют наши state(переменные)
     reducers: {
         addItems: (state, action) => {
+            // Создаем findId в котом осуществляется поиск сущетсвуещего объекта, если оно существует, то увеличивает его количество на 1. Если нет добавляет его в массив
+            const findId = state.items.find((item) => item.id === action.payload.id)
 
-            const findId = state.items.find((item) => item.id === action.payload?.id)
 
             if(findId){
                 findId.count++;

@@ -35,7 +35,6 @@ export default function Sort() {
       const path = e.composedPath()
       console.log()
       if (!e.composedPath().includes(sortRef.current)) {
-        console.log('asd')
         setActive(false)
 
       }

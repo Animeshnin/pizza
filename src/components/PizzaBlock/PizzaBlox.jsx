@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {addItems} from "../../redux/slices/cartSlice";
+import Modal from "../Modal/Modal";
 
 export default function PizzaBlox({ id ,imageUrl, title, price, sizes, types }) {
   const [activeTypeName, setActiveTypeName] = useState(0);
+  const [modalActive, setModalActive] = useState(false);
   const count = useSelector(state =>  state.cart.items.find(obj => obj.id === id))
   const [sizePizza, setSizePizza] = useState(0);
   const typeName = ["тонкое", "традиционное"];
@@ -28,7 +30,7 @@ export default function PizzaBlox({ id ,imageUrl, title, price, sizes, types }) 
   return (
     <div className="pizza-block-wrapper">
       <div className="pizza-block">
-        <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
+        <img onClick={() => setModalActive(true)} className="pizza-block__image" src={imageUrl} alt="Pizza" />
         <h4 className="pizza-block__title">{title}</h4>
         <div className="pizza-block__selector">
           <ul>
@@ -74,6 +76,19 @@ export default function PizzaBlox({ id ,imageUrl, title, price, sizes, types }) 
           </button>
         </div>
       </div>
+      <Modal active={modalActive} setActive={setModalActive}>
+        <img className="pizza-block__image" src={imageUrl} alt={'Pizza'}/>
+        <div>
+          <div className={'pizza-block-right'}>
+            <h4 className="pizza-block__title">Пицца {title}</h4>
+          </div>
+          <div className={'pizza-block-text '}>
+            <p>Тут нет ничего интересного. Хотел просто сделать пересоздаваемое модальное окно</p>
+          </div>
+        </div>
+
+      </Modal>
+
     </div>
   );
 }

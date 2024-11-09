@@ -11,14 +11,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import {fetchPizzas, getPizza} from "../redux/slices/pizzasSlice";
+import Modal from "../components/Modal/Modal";
 
 export const Home = () => {
+
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const isSearch = useRef(false)
     const isMounted = useRef(false);
-
     const categoryId = useSelector((state) => state.filter.categoryId);
     const sortType = useSelector((state) => state.filter.sort.sort);
     const items = useSelector((state) => state.pizzas.items);

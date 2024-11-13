@@ -1,12 +1,25 @@
 import React, { useState } from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {addItems} from "../../redux/slices/cartSlice";
+import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
+import {addItems, CartItemSlice} from "../../redux/slices/cartSlice";
 import Modal from "../Modal/Modal";
+import {RootState} from "../../redux/store";
 
-export default function PizzaBlox({ id ,imageUrl, title, price, sizes, types }) {
+export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+
+type PizzaBloxProps = {
+  id: number;
+  imageUrl: string;
+  title: string;
+  price: number;
+  sizes: number[];
+  types: number[];
+}
+
+export default function PizzaBlox({ id ,imageUrl, title, price, sizes, types } : PizzaBloxProps) {
   const [activeTypeName, setActiveTypeName] = useState(0);
   const [modalActive, setModalActive] = useState(false);
-  const count = useSelector(state =>  state.cart.items.find(obj => obj.id === id))
+  const count = useTypedSelector(state =>  state.cart.items.find(obj => obj.id === id))
   const [sizePizza, setSizePizza] = useState(0);
   const typeName = ["тонкое", "традиционное"];
   const sizesValue = [20, 30, 40];
@@ -14,14 +27,15 @@ export default function PizzaBlox({ id ,imageUrl, title, price, sizes, types }) 
   const addCount = count ? count.count : 0
   const dispatch = useDispatch();
 
-  const onClickAdd = (e) => {
-    const obj = {
+  const onClickAdd = () => {
+    const obj: CartItemSlice = {
       id,
       title,
       price,
       imageUrl,
       type: typeName[activeTypeName],
       size: sizesValue[sizePizza],
+      count: 0,
     }
 
     dispatch(addItems(obj))
@@ -45,7 +59,7 @@ export default function PizzaBlox({ id ,imageUrl, title, price, sizes, types }) 
             ))}
           </ul>
           <ul>
-            {sizes.map((size, i) => (
+            {sizes.map((size: number, i: number) => (
               <li
                 onClick={() => setSizePizza(i)}
                 key={i}

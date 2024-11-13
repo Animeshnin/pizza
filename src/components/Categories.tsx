@@ -1,6 +1,13 @@
 import React from 'react'
 
-export default function Categories({categoryId, setCategoryId}) {
+type CategoriesProps = {
+  categoryId: number;
+  setCategoryId: (i : number) => void;
+}
+
+
+// {categoryId , setCategoryId} : CategoriesProps можно так
+const Categories: React.FC<CategoriesProps> = ({categoryId , setCategoryId}) => {
 
   const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
 
@@ -14,3 +21,5 @@ export default function Categories({categoryId, setCategoryId}) {
   </div>
   )
 }
+
+export default Categories

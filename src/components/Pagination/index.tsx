@@ -2,8 +2,11 @@ import React from 'react'
 import style from "./pagination.module.scss"
 import ReactPaginate from "react-paginate";
 
+type PaginationProps = {
+  handleClickPage: (page: number) => void;
+}
 
-export default function Pagination({handleClickPage}) {
+export default function Pagination({handleClickPage}: PaginationProps)  {
   return (
     <ReactPaginate
     className={style.root}

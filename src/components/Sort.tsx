@@ -2,39 +2,43 @@ import React, {useEffect, useRef, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import { setSortType} from "../redux/slices/filterSlice";
 
-export const list = [
+
+type SortType = {
+  name: string;
+  type: 'rating' | 'title' | 'price';
+}
+
+export const list : SortType[] = [
   {
     name: "популярности",
-    sort: 'rating',
+    type: 'rating',
   },
   {
     name: "цене",
-    sort: 'price',
+    type: 'price',
   },
   {
     name: "алфавиту",
-    sort: 'title',
+    type: 'title',
   }
 ]
 
 
 export default function Sort() {
   const [active, setActive] = useState(false)
-  const sortType = useSelector((state) => state.filter.sort);
+  const sortType = useSelector((state : { filter: { sort: { name: string, type: string }}}) => state.filter.sort);
   const dispatch = useDispatch();
-  const sortRef = useRef();
+  const sortRef = useRef<HTMLSpanElement>(null);
 
 
-  const updateStateActiveAndSort = (text) => {
+  const updateStateActiveAndSort = (text : SortType) => {
     setActive(prev => !prev)
     dispatch(setSortType(text))
   }
 
   useEffect(() => {
-    const handleClickBody = (e) => {
-      const path = e.composedPath()
-      console.log()
-      if (!e.composedPath().includes(sortRef.current)) {
+    const handleClickBody = (e: MouseEvent ) => {
+      if (sortRef.current && !e.composedPath().includes(sortRef.current)) {
         setActive(false)
 
       }

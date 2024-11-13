@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import {useSelector} from "react-redux";
 
 export default function Header() {
-  const {totalPrice, items} = useSelector((state) => state.cart);
+  const {totalPrice, items } = useSelector((state : any) => state.cart);
 
-  const totalCount = items.reduce((acc, item) => {
+  const totalCount: number = items.reduce((acc:number, item: { count: number}) => {
     return acc += item.count;
   }, 0)
 

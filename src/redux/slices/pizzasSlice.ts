@@ -1,6 +1,5 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import axios from "axios";
-import {CartItemSlice} from "./cartSlice";
 
 type FetchPizzaArgs = {
     currentPage: number;

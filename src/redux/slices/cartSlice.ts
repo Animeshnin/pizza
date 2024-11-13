@@ -1,6 +1,4 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {RootState} from "../store";
-import {totalmem} from "node:os";
 
 export type CartItemSlice = {
     id: number;
@@ -33,7 +31,7 @@ const cartSlice = createSlice({
     reducers: {
         addItems: (state, action: PayloadAction<CartItemSlice>) => {
             // Создаем findId в котором осуществляется поиск существующего объекта, если оно существует, то увеличивает его количество на 1. Если нет добавляет его в массив
-            const findId = state.items.find((item) => item.id == action.payload.id)
+            const findId = state.items.find((item) => item.id === action.payload.id)
 
 
             if(findId){
@@ -78,7 +76,7 @@ const cartSlice = createSlice({
 
 
 
-const selectCart = (state: RootState ) => state.cart;
+// const selectCart = (state: RootState ) => state.cart;
 
 export const {addItems, removeItems, clearItems, plusItems, minusItems} = cartSlice.actions;
 

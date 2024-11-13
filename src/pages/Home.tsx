@@ -6,10 +6,10 @@ import {useEffect, useRef, useState} from "react";
 import Skeleton from "../components/PizzaBlock/Skeleton";
 import Search from "../components/Search";
 import Pagination from "../components/Pagination";
-import {setCategoryId, setFilters, SortType} from "../redux/slices/filterSlice";
+import {setCategoryId, setFilters} from "../redux/slices/filterSlice";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {useLocation, useNavigate} from "react-router-dom";
-import {fetchPizzas, getPizza} from "../redux/slices/pizzasSlice";
+import {fetchPizzas} from "../redux/slices/pizzasSlice";
 import {RootState} from "../redux/store";
 
 export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
@@ -18,7 +18,7 @@ export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 export const Home = () => {
     //  навигация в сайте
     const navigate = useNavigate();
-    // хук useLocation показывает текущее местоположение в сайтн
+    // хук useLocation показывает текущее местоположение в сайта
     const location = useLocation()
     const dispatch = useDispatch();
 
@@ -43,7 +43,7 @@ export const Home = () => {
     useEffect(() => {
         // если адресная строка после localhost не пустая
         if(location.search){
-            // парсим с адресной строки данные. Пример sortType=rating стал частью объекта и теперь выглядит так:
+            // Парсим с адресной строки данные. Пример sortType=rating стал частью объекта и теперь выглядит так:
             // sortType: 'rating'
             const params = qs.parse(location.search.substring(1));
             const sort = list.find((obj ) => obj.name === params.sort) ;

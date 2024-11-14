@@ -1,23 +1,8 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-
-export type CartItemSlice = {
-    id: number;
-    title: string;
-    price: number;
-    imageUrl: string;
-    type: string;
-    size: number;
-    count: number;
-}
-
-interface CartSliceState {
-    totalPrice: number;
-    items: CartItemSlice[];
-    typePizza: string
-}
+import {ICartSliceState, TCartItemSlice} from './types';
 
 
-const initialState : CartSliceState = {
+const initialState : ICartSliceState = {
     totalPrice: 0,
     items: [],
     typePizza: 'тонкое'
@@ -29,7 +14,7 @@ const cartSlice = createSlice({
     initialState,
     // reducers в нем хранятся функции которые, изменяют наши state(переменные)
     reducers: {
-        addItems: (state, action: PayloadAction<CartItemSlice>) => {
+        addItems: (state, action: PayloadAction<TCartItemSlice>) => {
             // Создаем findId в котором осуществляется поиск существующего объекта, если оно существует, то увеличивает его количество на 1. Если нет добавляет его в массив
             const findId = state.items.find((item) => item.id === action.payload.id)
 
@@ -43,8 +28,8 @@ const cartSlice = createSlice({
             state.totalPrice = state.items.reduce((total, item) => total + (item.price * item.count), 0);
         },
         removeItems: (state, action: PayloadAction<{id: number, price: number, count: number}>) => {
-                state.totalPrice -=action.payload.price * action.payload.count;
-                state.items = state.items.filter(obj => obj.id !== action.payload.id)
+            state.totalPrice -=action.payload.price * action.payload.count;
+            state.items = state.items.filter(obj => obj.id !== action.payload.id)
 
         },
         clearItems: (state) => {

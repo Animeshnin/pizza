@@ -6,7 +6,7 @@ import {useEffect, useRef, useState} from "react";
 import Skeleton from "../components/PizzaBlock/Skeleton";
 import Search from "../components/Search";
 import Pagination from "../components/Pagination";
-import {setCategoryId, setFilters} from "../redux/slices/filterSlice";
+import {setCategoryId, setFilters} from "../redux/slices/filter/slice";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {useLocation, useNavigate} from "react-router-dom";
 import {fetchPizzas} from "../redux/slices/pizzasSlice";

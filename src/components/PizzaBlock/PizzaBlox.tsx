@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import {addItems, CartItemSlice} from "../../redux/slices/cartSlice";
+import {addItems} from "../../redux/slices/cart/slice";
+
 import Modal from "../Modal/Modal";
 import {RootState} from "../../redux/store";
+import {TCartItemSlice} from "../../redux/slices/cart/types";
 
 export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 
@@ -28,7 +30,7 @@ export default function PizzaBlox({ id ,imageUrl, title, price, sizes, types } :
   const dispatch = useDispatch();
 
   const onClickAdd = () => {
-    const obj: CartItemSlice = {
+    const obj: TCartItemSlice = {
       id,
       title,
       price,

@@ -1,7 +1,7 @@
 import React from "react";
 import CartItem from "../components/CartItem";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import {clearItems} from "../redux/slices/cartSlice";
+import {clearItems} from "../redux/slices/cart/slice";
 import CartEmpty from "../components/CartEmpty";
 import {RootState} from "../redux/store";
 
